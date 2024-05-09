@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import TextInput from './components/TextInput';
 import FileInput from './components/FileInput';
 import SubmitButton from './components/SubmitButton';
-import awsService from './services/awsService';
 const { nanoid } = require('nanoid');
 
 function App() {
@@ -34,22 +33,18 @@ function App() {
         filePath: `fovus-files/${fileInput.name}`,
       });
 
-      await fetch(
-        'https://89mzf80hfj.execute-api.us-east-1.amazonaws.com/prod/v1/file',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: payload,
-        }
-      );
-      console.log('POST request sent successfully');
-
-      const uploadUrl = await awsService.generateUploadUrl(fileInput);
-
-      if (uploadUrl) {
-        // Performing file upload using generated URL
+      let response = await fetch(process.env.REACT_APP_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: payload,
+      });
+      if (response.ok) {
+        // If the response status is in the range 200-299
+        // Parse the JSON body of the response
+        let data = await response.json();
+        let uploadUrl = data.url;
         try {
           await fetch(uploadUrl, {
             method: 'PUT',
@@ -62,12 +57,16 @@ function App() {
         } catch (error) {
           console.error('Error uploading file:', error);
         }
+      } else {
+        // If the response status is not in the range 200-299
+        console.error('Request failed with status:', response.status);
       }
     } catch (error) {
       console.error('Error:', error);
       setErrorMessage('Error uploading file. Please try again.');
     }
   };
+
   return (
     <div className='container mx-auto px-4 py-8'>
       <h1 className='text-3xl font-bold mb-8'>
