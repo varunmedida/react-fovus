@@ -41,8 +41,6 @@ function App() {
         body: payload,
       });
       if (response.ok) {
-        // If the response status is in the range 200-299
-        // Parse the JSON body of the response
         let data = await response.json();
         let uploadUrl = data.url;
         try {
