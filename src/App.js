@@ -30,7 +30,7 @@ function App() {
       const payload = JSON.stringify({
         id: nanoid(),
         text: textInput,
-        filePath: `fovus-files/${fileInput.name}`,
+        filePath: `${process.env.REACT_BUCKET_NAME}/${fileInput.name}`,
       });
 
       let response = await fetch(process.env.REACT_APP_API, {
