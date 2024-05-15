@@ -8,6 +8,8 @@
 
 ### 4. Run npm start to start your application (Make sure 3000 port is free)
 
+### 5. Also make sure you change your bucketname in the .env folder and point it to your bucket
+
 Application is hosted on amplify link https://main.dqhqw2rjarmw8.amplifyapp.com/
 
 Screenshots are in the screenshots folder.
