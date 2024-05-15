@@ -6,6 +6,7 @@ import SubmitButton from './components/SubmitButton';
 const { nanoid } = require('nanoid');
 
 function App() {
+  const bucketName = process.env.REACT_APP_BUCKET_NAME;
   const [textInput, setTextInput] = useState('');
   const [fileInput, setFileInput] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -30,7 +31,7 @@ function App() {
       const payload = JSON.stringify({
         id: nanoid(),
         text: textInput,
-        filePath: `${process.env.REACT_BUCKET_NAME}/${fileInput.name}`,
+        filePath: `${bucketName}/${fileInput.name}`,
       });
 
       let response = await fetch(process.env.REACT_APP_API, {
