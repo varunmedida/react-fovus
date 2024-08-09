@@ -68,9 +68,7 @@ function App() {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-3xl font-bold mb-8'>
-        Fovus Flowbite Reactjs AWS Coding Challenge
-      </h1>
+      <h1 className='text-3xl font-bold mb-8'>File Processing Application</h1>
       <form onSubmit={handleSubmit} className='max-w-lg mx-auto'>
         <TextInput value={textInput} onChange={handleTextChange} />
         <FileInput onChange={handleFileChange} />
@@ -83,6 +81,12 @@ function App() {
           </div>
         )}
         <SubmitButton onSubmit={handleSubmit} />
+        <h2 className='text-2xl font-bold mt-4'>Architecture Diagram</h2>
+        <img
+          src='/Architecture.png'
+          alt='Architecture Diagram'
+          className='image'
+        />
       </form>
     </div>
   );
